@@ -12,61 +12,58 @@ import static com.alibaba.jvm.sandbox.core.util.SandboxStringUtils.getCauseMessa
 public class CoreLauncher {
 
 
-    public CoreLauncher(final String targetJvmPid,
-                        final String agentJarPath,
-                        final String token) throws Exception {
+	public CoreLauncher(final String targetJvmPid, final String agentJarPath, final String token) throws Exception {
 
-        // 加载agent
-        attachAgent(targetJvmPid, agentJarPath, token);
+		// 加载agent
+		attachAgent(targetJvmPid, agentJarPath, token);
 
-    }
+	}
 
-    /**
-     * 内核启动程序
-     *
-     * @param args 参数
-     *             [0] : PID
-     *             [1] : agent.jar's value
-     *             [2] : token
-     */
-    public static void main(String[] args) {
-        try {
+	/**
+	 * 内核启动程序
+	 *
+	 * @param args 参数
+	 *             [0] : PID
+	 *             [1] : agent.jar's value
+	 *             [2] : token
+	 * 例子：
+	 * 12464 /apps/learn/jvm-sandbox/target/sandbox/bin/../lib/sandbox-agent.jar home=/apps/learn/jvm-sandbox/target/sandbox/bin/..;token=66549544929;server.ip=0.0.0.0;server.port=0;namespace=default
+	 */
+	public static void main(String[] args) {
+		try {
 
-            // check args
-            if (args.length != 3
-                    || StringUtils.isBlank(args[0])
-                    || StringUtils.isBlank(args[1])
-                    || StringUtils.isBlank(args[2])) {
-                throw new IllegalArgumentException("illegal args");
-            }
+			// check args
+			if (args.length != 3 || StringUtils.isBlank(args[0]) || StringUtils.isBlank(args[1]) || StringUtils
+					.isBlank(args[2])) {
+				throw new IllegalArgumentException("illegal args");
+			}
+			System.out.println("args = " + args[0] + ", " + args[1] + ", " + args[2]);
 
-            new CoreLauncher(args[0], args[1], args[2]);
-        } catch (Throwable t) {
-            t.printStackTrace(System.err);
-            System.err.println("sandbox load jvm failed : " + getCauseMessage(t));
-            System.exit(-1);
-        }
-    }
+			new CoreLauncher(args[0], args[1], args[2]);
+		} catch (Throwable t) {
+			t.printStackTrace(System.err);
+			System.err.println("sandbox load jvm failed : " + getCauseMessage(t));
+			System.exit(-1);
+		}
+	}
 
-    // 加载Agent
-    private void attachAgent(final String targetJvmPid,
-                             final String agentJarPath,
-                             final String cfg) throws Exception {
+	// 加载Agent
+	private void attachAgent(final String targetJvmPid, final String agentJarPath, final String cfg) throws Exception {
 
-        VirtualMachine vmObj = null;
-        try {
+		VirtualMachine vmObj = null;
+		try {
 
-            vmObj = VirtualMachine.attach(targetJvmPid);
-            if (vmObj != null) {
-                vmObj.loadAgent(agentJarPath, cfg);
-            }
+			vmObj = VirtualMachine.attach(targetJvmPid);
+			if (vmObj != null) {
+				vmObj.loadAgent(agentJarPath, cfg);
+			}
 
-        } finally {
-            if (null != vmObj) {
-                vmObj.detach();
-            }
-        }
+		} finally {
+			if (null != vmObj) {
+				vmObj.detach();
+			}
+		}
 
-    }
+	}
 
 }
