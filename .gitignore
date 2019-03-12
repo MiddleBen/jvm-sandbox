@@ -13,3 +13,9 @@ sandbox-agent/target/
 sandbox-debug-module/target/
 sandbox-mgr-module/target/
 sandbox-mgr-provider/target/
+lhm-test/target/
+/target/
+*.html
+apidocs
+*.class
+

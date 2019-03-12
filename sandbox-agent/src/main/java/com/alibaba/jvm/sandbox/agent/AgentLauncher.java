@@ -100,14 +100,18 @@ public class AgentLauncher {
      * @param inst          inst
      */
     public static void agentmain(String featureString, Instrumentation inst) {
-        LAUNCH_MODE = LAUNCH_MODE_ATTACH;
-        final Map<String, String> featureMap = toFeatureMap(featureString);
-        writeAttachResult(
-                getNamespace(featureMap),
-                getToken(featureMap),
-                install(featureMap, inst)
-        );
-    }
+		try {
+			LAUNCH_MODE = LAUNCH_MODE_ATTACH;
+			final Map<String, String> featureMap = toFeatureMap(featureString);
+			writeAttachResult(
+					getNamespace(featureMap),
+					getToken(featureMap),
+					install(featureMap, inst)
+			);
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+	}
 
     /**
      * 写入本次attach的结果

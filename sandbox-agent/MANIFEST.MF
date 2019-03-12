@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Archiver-Version: Plexus Archiver
+Created-By: Apache Maven
+Built-By: root
+Build-Jdk: 1.8.0_11
+Agent-Class: com.alibaba.jvm.sandbox.agent.AgentLauncher
+Can-Redefine-Classes: true
+Can-Retransform-Classes: true
+Premain-Class: com.alibaba.jvm.sandbox.agent.AgentLauncher
+

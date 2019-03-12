@@ -27,11 +27,10 @@ public class CoreLauncher {
 	 *             [1] : agent.jar's value
 	 *             [2] : token
 	 * 例子：
-	 * 12464 /apps/learn/jvm-sandbox/target/sandbox/bin/../lib/sandbox-agent.jar home=/apps/learn/jvm-sandbox/target/sandbox/bin/..;token=66549544929;server.ip=0.0.0.0;server.port=0;namespace=default
+	 * 10968 D:\Users\ben01.li\Desktop\viplearning\jvm-sandbox\target\sandbox\lib\sandbox-agent.jar home=D:\Users\ben01.li\Desktop\viplearning\jvm-sandbox\target\sandbox;token=261798304829;server.ip=0.0.0.0;server.port=0;namespace=default
 	 */
 	public static void main(String[] args) {
 		try {
-
 			// check args
 			if (args.length != 3 || StringUtils.isBlank(args[0]) || StringUtils.isBlank(args[1]) || StringUtils
 					.isBlank(args[2])) {
