@@ -219,6 +219,7 @@ public class AgentLauncher {
 
         try {
 
+        	// TODO 这里为啥要把Spy类用BootstrapClassLoader来加载呢？
             // 将Spy注入到BootstrapClassLoader
             inst.appendToBootstrapClassLoaderSearch(new JarFile(new File(
                     getSandboxSpyJarPath(getSandboxHome(featureMap))
