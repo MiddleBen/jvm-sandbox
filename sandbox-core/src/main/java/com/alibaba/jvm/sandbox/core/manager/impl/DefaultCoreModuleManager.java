@@ -45,7 +45,7 @@ public class DefaultCoreModuleManager implements CoreModuleManager {
     // 模块目录&文件集合
     private final File[] moduleLibDirArray;
 
-    // 已加载的模块集合
+    // 已加载的模块集合，模块就是module目录下面jar包里面定义的moule集合 - li
     private final Map<String, CoreModule> loadedModuleBOMap = new ConcurrentHashMap<String, CoreModule>();
 
     /**

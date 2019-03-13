@@ -107,7 +107,7 @@ public class AgentLauncher {
 					getNamespace(featureMap),
 					getToken(featureMap),
 					install(featureMap, inst)
-			);
+			);// 这个writeAttachResult貌似就写了个token文件，暂时不知道有啥用 -li
 		} catch (Exception e) {
 			System.out.println(e);
 		}
@@ -162,7 +162,7 @@ public class AgentLauncher {
 
     private static synchronized ClassLoader loadOrDefineClassLoader(final String namespace,
                                                                     final String coreJar) throws Throwable {
-
+		//namespace 由命令行参数指定 coreJar sandbox-core.jar所在路径，一般就是".../lib/sandbox-core.jar"
         final SandboxClassLoader classLoader;
 
         // 如果已经被启动则返回之前启动的ClassLoader
@@ -226,7 +226,7 @@ public class AgentLauncher {
                     // SANDBOX_SPY_JAR_PATH
             )));
 
-            // 构造自定义的类加载器，尽量减少Sandbox对现有工程的侵蚀
+            // 构造自定义的类加载器，尽量减少Sandbox对现有工程的侵蚀 —— li sandboxClassLoader是appClassLoader加载进来的
             final ClassLoader sandboxClassLoader = loadOrDefineClassLoader(
                     namespace,
                     getSandboxCoreJarPath(getSandboxHome(featureMap))
@@ -248,7 +248,7 @@ public class AgentLauncher {
                     .getMethod("getInstance")
                     .invoke(null);
 
-            // CoreServer.isBind()
+            // CoreServer.isBind()， 一般此时已经bind完成，哪里执行的bind操作后续看 -li
             final boolean isBind = (Boolean) classOfProxyServer.getMethod("isBind").invoke(objectOfProxyServer);
 
 

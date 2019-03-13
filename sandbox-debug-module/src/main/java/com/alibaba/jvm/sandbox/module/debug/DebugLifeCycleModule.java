@@ -77,7 +77,7 @@ public class DebugLifeCycleModule implements Module, ModuleLifecycle{
         final String cnPattern = getParameter(param, "class");
         final String mnPattern = getParameter(param, "method");
 
-
+		// 注意下面是个超级大的方法调用
         int watcherId = moduleEventWatcher.watch(
                 new ExtFilter(){//不增强类，这里只是体验sandbox的生命周期，ExtFilter新增了增强接口的所有实现类，到boostrap ClassLoader中加载类 的能力
 
@@ -108,7 +108,7 @@ public class DebugLifeCycleModule implements Module, ModuleLifecycle{
                 new EventListener() {//监听到的事件，不做任何处理
                     @Override
                     public void onEvent(Event event) throws Throwable {
-
+						System.out.println(event);
                     }
                 },
                 new ModuleEventWatcher.Progress() {//如果有增强类，可以通过这里查看增强的进度

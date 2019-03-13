@@ -187,7 +187,7 @@ public class CoreModule {
 
     /**
      * 在模块下追加一个可释放资源
-     *
+     * 目前发现的加入了servlet的response，估计是执行完module的方法后用于释放 -li
      * @param resource 可释放资源封装
      * @param <T>      资源实体
      * @return 资源实体本身
@@ -270,7 +270,7 @@ public class CoreModule {
 
         /**
          * 构造释放资源
-         *
+         * 为啥用弱连接呢？ li TODO
          * @param resource 资源目标
          */
         public ReleaseResource(T resource) {

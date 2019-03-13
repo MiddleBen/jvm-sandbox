@@ -15,13 +15,13 @@ public class ProxyCoreServer implements CoreServer {
     private final CoreServer proxy;
 
     private ProxyCoreServer(CoreServer proxy) {
-        this.proxy = proxy;
+        this.proxy = proxy;// AgentLauncher.java中通过反射调用getInstance方法注入 JettyCoreServer -- li
     }
 
 
     @Override
     public boolean isBind() {
-        return proxy.isBind();
+        return proxy.isBind();//除了代码显式调用外，AgentLauncher.java 252行通过反射调用 -- li
     }
 
     @Override

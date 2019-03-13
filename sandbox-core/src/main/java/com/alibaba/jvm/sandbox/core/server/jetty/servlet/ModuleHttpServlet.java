@@ -112,11 +112,11 @@ public class ModuleHttpServlet extends HttpServlet {
 
 
         final boolean isAccessible = method.isAccessible();
-        final ClassLoader oriThreadContextClassLoader = Thread.currentThread().getContextClassLoader();
+        final ClassLoader oriThreadContextClassLoader = Thread.currentThread().getContextClassLoader();// sandboxClassLoader -li
         try {
             method.setAccessible(true);
-            Thread.currentThread().setContextClassLoader(coreModule.getLoader());
-            method.invoke(coreModule.getModule(), parameterObjectArray);
+            Thread.currentThread().setContextClassLoader(coreModule.getLoader());// ModuleJarClassLoader TODO 看看怎么用这个classLoader加载进来的 -li
+            method.invoke(coreModule.getModule(), parameterObjectArray);// 这里就是直接调用module的方法 -li
             logger.debug("http request value={} invoke module[id={};] {}#{} success.",
                     path, uniqueId, coreModule.getModule().getClass().getName(), method.getName());
         } catch (IllegalAccessException iae) {
@@ -135,7 +135,7 @@ public class ModuleHttpServlet extends HttpServlet {
             }
             throw new ServletException(targetCause);
         } finally {
-            Thread.currentThread().setContextClassLoader(oriThreadContextClassLoader);
+            Thread.currentThread().setContextClassLoader(oriThreadContextClassLoader);// sandboxClassLoader -li
             method.setAccessible(isAccessible);
             coreModule.release(writer);
         }
