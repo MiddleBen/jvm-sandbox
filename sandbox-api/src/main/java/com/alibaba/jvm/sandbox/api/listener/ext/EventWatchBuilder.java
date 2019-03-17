@@ -425,7 +425,7 @@ public class EventWatchBuilder {
         private boolean isIncludeBootstrap = false;
         private final PatternGroupList hasInterfaceTypes = new PatternGroupList();
         private final PatternGroupList hasAnnotationTypes = new PatternGroupList();
-        private final List<BuildingForBehavior> bfBehaviors = new ArrayList<BuildingForBehavior>();
+        private final List<BuildingForBehavior> bfBehaviors = new ArrayList<BuildingForBehavior>();// 保存要执行的方法列表 li
 
         /**
          * 构造类构建器

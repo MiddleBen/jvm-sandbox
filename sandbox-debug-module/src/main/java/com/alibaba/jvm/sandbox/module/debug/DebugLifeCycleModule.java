@@ -44,7 +44,7 @@ public class DebugLifeCycleModule implements Module, ModuleLifecycle{
     private ModuleManager moduleManager;
 
     @Override
-    public void onLoad() throws Throwable {
+    public void onLoad() throws Throwable {// 在模块加载的时候被回调，DefaultCoreModuleManager.java callAndFireModuleLifeCycle li
         lifeCLogger.info("sandbox-module-debug-lifecycle onLoaded.");
     }
 
@@ -54,7 +54,7 @@ public class DebugLifeCycleModule implements Module, ModuleLifecycle{
     }
 
     @Override
-    public void onActive() throws Throwable {
+    public void onActive() throws Throwable {// 在模块加载后（onLoad），被激活的时候被回调，DefaultCoreModuleManager.java -》active -》 callAndFireModuleLifeCycle li
         lifeCLogger.info("sandbox-module-debug-lifecycle onActive.");
     }
 
@@ -64,7 +64,7 @@ public class DebugLifeCycleModule implements Module, ModuleLifecycle{
     }
 
     @Override
-    public void loadCompleted() {
+    public void loadCompleted() {// 在模块加载（onLoad）、激活（onActive）后被回调，DefaultCoreModuleManager.java -》load 最后一句 li
         lifeCLogger.info("sandbox-module-debug-lifecycle loadCompleted.");
     }
 

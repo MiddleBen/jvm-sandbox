@@ -72,7 +72,7 @@ class ModuleLibLoader {
         // 开始逐条加载
         for (final File moduleJarFile : listModuleJarFileInLib()) {
             try {
-                mjCb.onLoad(moduleJarFile);
+                mjCb.onLoad(moduleJarFile);// 空方法？ li
                 new ModuleJarLoader(moduleJarFile, mode).load(mCb);
             } catch (Throwable cause) {
                 logger.warn("loading module-jar occur error! module-jar={};", moduleJarFile, cause);

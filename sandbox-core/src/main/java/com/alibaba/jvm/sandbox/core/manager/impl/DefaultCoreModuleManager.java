@@ -79,11 +79,11 @@ public class DefaultCoreModuleManager implements CoreModuleManager {
         return _r.toArray(new File[]{});
     }
 
-    /*
+    /*coreModule如果不实现LoadCompleted或者ModuleLifeCycle则等于啥都没干 -li
      * 通知模块生命周期
      */
     private void callAndFireModuleLifeCycle(final CoreModule coreModule, final ModuleLifeCycleType type) throws ModuleException {
-        if (coreModule.getModule() instanceof ModuleLifecycle) {
+        if (coreModule.getModule() instanceof ModuleLifecycle) {// ModuleLifecycle作用是什么呢，什么样作用的module要继承这个？ li
             final ModuleLifecycle moduleLifecycle = (ModuleLifecycle) coreModule.getModule();
             final String uniqueId = coreModule.getUniqueId();
             switch (type) {
@@ -174,18 +174,18 @@ public class DefaultCoreModuleManager implements CoreModuleManager {
         // 注入@Resource资源
         injectResourceOnLoadIfNecessary(coreModule);
 
-        callAndFireModuleLifeCycle(coreModule, MODULE_LOAD);
+        callAndFireModuleLifeCycle(coreModule, MODULE_LOAD);// coreModule如果不是ModuleLifecycle的实现类，啥都不用做 li
 
         // 设置为已经加载
         coreModule.markLoaded(true);
 
         // 如果模块标记了加载时自动激活，则需要在加载完成之后激活模块
-        markActiveOnLoadIfNecessary(coreModule);
+        markActiveOnLoadIfNecessary(coreModule);//如果coreModule没有实现ModuleLifecycle则激活貌似啥都没干
 
         // 注册到模块列表中
         loadedModuleBOMap.put(uniqueId, coreModule);
 
-        // 通知生命周期，模块加载完成
+        // 通知生命周期，模块加载完成.
         callAndFireModuleLifeCycle(coreModule, MODULE_LOAD_COMPLETED);
 
     }
@@ -195,7 +195,7 @@ public class DefaultCoreModuleManager implements CoreModuleManager {
             final Module module = coreModule.getModule();
             for (final Field resourceField : FieldUtils.getFieldsWithAnnotation(module.getClass(), Resource.class)) {
                 final Class<?> fieldType = resourceField.getType();
-
+                // 只有6中类型的接口实现类能注入 li
                 // LoadedClassDataSource对象注入
                 if (LoadedClassDataSource.class.isAssignableFrom(fieldType)) {
                     writeField(
@@ -213,7 +213,7 @@ public class DefaultCoreModuleManager implements CoreModuleManager {
                             classDataSource,
                             coreModule,
                             cfg.isEnableUnsafe(),
-                            cfg.getNamespace()
+                            cfg.getNamespace()// 这个构造函数把reference这个弱引用指向new出来的DefaultModuleEventWatcher
                     )) {
                         @Override
                         public void release() {
@@ -416,9 +416,9 @@ public class DefaultCoreModuleManager implements CoreModuleManager {
         );
 
         // 通知生命周期
-        callAndFireModuleLifeCycle(coreModule, MODULE_ACTIVE);
+        callAndFireModuleLifeCycle(coreModule, MODULE_ACTIVE);// coreModule如果没有实现ModuleLifecycle那么这里啥都没跑 li
 
-        // 激活所有监听器
+        // 激活所有监听器。 后面看看类转换器怎么玩 li
         for (final SandboxClassFileTransformer sandboxClassFileTransformer : coreModule.getSandboxClassFileTransformers()) {
             EventListenerHandlers.getSingleton().active(
                     sandboxClassFileTransformer.getListenerId(),
@@ -532,7 +532,7 @@ public class DefaultCoreModuleManager implements CoreModuleManager {
                            final ModuleJarClassLoader moduleClassLoader) throws Throwable {
 
             // 如果之前已经加载过了相同ID的模块，则放弃当前模块的加载
-            if (loadedModuleBOMap.containsKey(uniqueId)) {
+            if (loadedModuleBOMap.containsKey(uniqueId)) {// uniqueId也就是类上面的Information注解的id li
                 final CoreModule existedCoreModule = get(uniqueId);
                 logger.info("IMLCB: module already loaded, ignore load this module. expected:module={};class={};loader={}|existed:class={};loader={};",
                         uniqueId,
@@ -544,7 +544,7 @@ public class DefaultCoreModuleManager implements CoreModuleManager {
             }
 
             // 需要经过ModuleLoadingChain的过滤
-            providerManager.loading(
+            providerManager.loading(// 暂时发现这个实例就是个空壳 li
                     uniqueId,
                     moduleClass,
                     module,

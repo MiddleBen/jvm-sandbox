@@ -120,7 +120,7 @@ class ModuleJarLoader {
             moduleJarClassLoader = new ModuleJarClassLoader(moduleJarFile);
 
             final ClassLoader preTCL = Thread.currentThread().getContextClassLoader();
-            Thread.currentThread().setContextClassLoader(moduleJarClassLoader);
+            Thread.currentThread().setContextClassLoader(moduleJarClassLoader);// 注意这里，设置classLoader的用意是什么呢
 
             try {
                 hasModuleLoadedSuccessFlag = loadingModules(moduleJarClassLoader, mCb);

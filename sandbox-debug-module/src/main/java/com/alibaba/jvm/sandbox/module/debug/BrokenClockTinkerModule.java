@@ -16,7 +16,7 @@ import javax.annotation.Resource;
 @Information(id = "broken-clock-tinker")
 public class BrokenClockTinkerModule implements Module {
 
-    @Resource
+    @Resource// 在加载module的时候通过DefaultCoreModuleManager.java injectResourceOnLoadIfNecessary注入，是个DefaultModuleEventWatcher li
     private ModuleEventWatcher moduleEventWatcher;
 
     @Command("repairCheckState")

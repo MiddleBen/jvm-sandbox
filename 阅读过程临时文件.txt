@@ -1,0 +1,2 @@
+1.初始化加载所有模块入口在：JettyCoreServer.java bind
+2.ModuleJarLoader.java loadingModules 通过serviceLoader加载所定义module

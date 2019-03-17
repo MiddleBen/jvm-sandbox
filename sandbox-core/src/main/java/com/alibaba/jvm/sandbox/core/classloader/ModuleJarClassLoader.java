@@ -46,7 +46,7 @@ public class ModuleJarClassLoader extends RoutingURLClassLoader {
     }
 
     public ModuleJarClassLoader(final File moduleJarFile) throws IOException {
-        this(moduleJarFile, copyToTempFile(moduleJarFile));
+        this(moduleJarFile, copyToTempFile(moduleJarFile));// 為啥要把moudleJarFile拷貝到一個臨時文件里呢？
     }
 
     private ModuleJarClassLoader(final File moduleJarFile,
