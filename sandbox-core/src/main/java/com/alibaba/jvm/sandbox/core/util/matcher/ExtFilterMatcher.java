@@ -58,7 +58,7 @@ public class ExtFilterMatcher implements Matcher {
             if (extFilter.doClassFilter(
                     toFilterAccess(wmCs.getAccess()),
                     wmCs.getJavaClassName(),
-                    null == wmCs.getSuperClassStructure()
+                    null == wmCs.getSuperClassStructure()// 父类类名
                             ? null
                             : wmCs.getSuperClassStructure().getJavaClassName(),
                     toJavaClassNameArray(wmCs.getFamilyInterfaceClassStructures()),

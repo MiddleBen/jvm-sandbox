@@ -141,7 +141,7 @@ public class ClassStructureImplByJDK extends FamilyClassStructure {
                 ? javaClassName
                 : (javaClassName = getJavaClassName(clazz));
     }
-
+    // 获取类名，注意数组类名的获取办法 -li
     private String getJavaClassName(Class<?> clazz) {
         if (clazz.isArray()) {
             return getJavaClassName(clazz.getComponentType()) + "[]";

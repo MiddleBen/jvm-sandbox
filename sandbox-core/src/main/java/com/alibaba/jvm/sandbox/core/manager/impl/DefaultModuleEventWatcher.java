@@ -180,6 +180,8 @@ public class DefaultModuleEventWatcher implements ModuleEventWatcher {
         coreModule.getSandboxClassFileTransformers().add(sandClassFileTransformer);
 
         // 注册到JVM加载上ClassFileTransformer处理新增的类
+		// addTransformer 方法并没有指明要转换哪个类。转换发生在 premain 函数执行之后，main 函数执行之前
+		// 这时每装载一个类，transform 方法就会执行一次
         inst.addTransformer(sandClassFileTransformer, true);
 
         // 查找需要渲染的类集合
