@@ -219,7 +219,7 @@ public class AgentLauncher {
 
         try {
 
-        	// TODO 这里为啥要把Spy类用BootstrapClassLoader来加载呢？
+        	// TODO 这里为啥要把Spy类用BootstrapClassLoader来加载呢？ ——发现一个原因，如果不是它来加载，java开头的包名通不过校验
             // 将Spy注入到BootstrapClassLoader
             inst.appendToBootstrapClassLoaderSearch(new JarFile(new File(
                     getSandboxSpyJarPath(getSandboxHome(featureMap))

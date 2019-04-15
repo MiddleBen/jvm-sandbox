@@ -158,7 +158,7 @@
                 <groupId>com.alibaba.jvm.sandbox</groupId>
                 <artifactId>sandbox-core</artifactId>
                 <version>${sandbox.version}</version>
-                <scope>test</scope>
+                <!--<scope>test</scope>-->
             </dependency>
 
             <!-- servlet api -->

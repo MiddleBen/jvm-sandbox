@@ -190,7 +190,7 @@ public class Spy {
             if (null == hook) {
                 return Ret.RET_NONE;
             }
-            return (Ret) hook.ON_BEFORE_METHOD.invoke(null,
+            return (Ret) hook.ON_BEFORE_METHOD.invoke(null,// 表示静态方法
                     listenerId, targetClassLoaderObjectID, SPY_RET_CLASS, javaClassName, javaMethodName, javaMethodDesc, target, argumentArray);
         } catch (Throwable cause) {
             handleException(cause);

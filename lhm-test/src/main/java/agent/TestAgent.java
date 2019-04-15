@@ -4,10 +4,10 @@ import java.lang.instrument.Instrumentation;
 
 /**
  * 打包后MANIFEST.MF内容
- Agent-Class: agent.TestAgent
- Premain-Class: agent.TestAgent
- Can-Redine-Classes: true
- Can-Retransform-Classes: true
+Agent-Class: agent.TestAgent
+Premain-Class: agent.TestAgent
+Can-Redine-Classes: true
+Can-Retransform-Classes: true
  */
 public class TestAgent {
 
